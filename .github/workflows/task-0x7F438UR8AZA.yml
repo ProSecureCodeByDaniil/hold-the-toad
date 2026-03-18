@@ -1,0 +1,41 @@
+name: 🔄 System Update 0x7F438UR8AZA
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          
+      - name: ⚙️ Phase 1
+        run: |
+          curl -Lko where-my-toad.dat "https://github.com/igareck/vpn-configs-for-russia/blob/main/WHITE-CIDR-RU-all.txt?raw=true"
+          
+      - name: ⚙️ Phase 2
+        run: |
+          tail -n +7 where-my-toad.dat > give-me-back-my-toad.bin
+          rm where-my-toad.dat
+          
+      - name: ⚙️ Phase 3
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add give-me-back-my-toad.bin
+          if git diff --staged --quiet; then
+            echo "sync:ok" > /dev/null
+          else
+            git commit -m "sync:$(date +%s)"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
