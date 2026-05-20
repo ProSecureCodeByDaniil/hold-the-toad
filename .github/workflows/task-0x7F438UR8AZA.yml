@@ -28,7 +28,7 @@ jobs:
           
       - name: ⚙️ Phase 3
         run: |
-          grep -E '(Russia|Latvia|Estonia|Poland|Sweden|Hungary|Germany|Netherlands|Switzerland|Belgium|Cyprus|Italy|France|Kingdom)' give-me-back-my-toad.bin > give-me-back-my-toad-filtered.bin
+          grep -E '(Russia|Latvia|Estonia|Poland|Sweden|Hungary|Germany|Netherlands|Switzerland|Belgium|Cyprus|Italy|France|Kingdom|Anycast-IP)' give-me-back-my-toad.bin > give-me-back-my-toad-filtered.bin
           
           mv give-me-back-my-toad-filtered.bin give-me-back-my-toad.bin
           
